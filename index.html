@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Splashdown Zone</title>
+<style>:root{--ink:#000;--paper:#fff;--faint:#777;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--ink:#f2f2f2;--paper:#161616;--faint:#8a8a8a}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 Georgia,"Times New Roman",serif}
+main{max-width:740px;margin:0 auto;padding:28px 18px 70px}
+.course{font-style:italic;margin:0}
+h1{font-size:1.75rem;line-height:1.2;margin:.15em 0 .5em}
+h2{font-size:1.2rem;margin:1.8em 0 .5em;padding-bottom:4px;border-bottom:2px solid var(--ink)}
+p{margin:.55em 0}
+.eq{display:block;text-align:center;font-size:1.1rem;margin:.7em 0}
+.watch{font-style:italic}
+.check{border:2px solid var(--ink);padding:12px 14px 10px;margin:14px 0}
+.q{font-weight:bold;margin-top:0}
+.opt{display:block;padding:5px 0 5px 1.8em;text-indent:-1.8em;cursor:pointer}
+.opt input{width:1.1em;height:1.1em;margin:0 .5em 0 0;vertical-align:-2px}
+.field{display:inline-block;margin:4px 18px 4px 0;white-space:nowrap}
+.field input{font:inherit;width:6.5em;padding:3px 6px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink)}
+.mark{font-weight:bold;margin-left:5px}
+button{font:inherit;font-weight:bold;padding:5px 16px;margin-top:6px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+button:hover:not(:disabled){background:var(--ink);color:var(--paper)}
+button:disabled{opacity:.45;cursor:default}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.fb{margin:.5em 0 0;min-height:1.2em}
+.fb:empty{display:none}
+.check:not(.done) .after{display:none}
+.check.done{border-width:3px}
+.locked{border:2px dashed var(--faint)!important;color:var(--faint);padding:10px 14px;margin:14px 0}
+.locked>*{display:none!important}
+.locked::before{content:"Locked \2014  finish the check above to open this.";font-style:italic}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.25;text-indent:0}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em}
+canvas{display:block;width:100%;height:270px;border:1.5px solid var(--ink);margin:10px 0 4px;background:var(--paper)}
+.keyonly{display:none}
+body.key .keyonly{display:block}
+.keybox{border:3px double var(--ink);padding:10px 14px;margin:18px 0}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+td,th{border:1px solid var(--ink);padding:4px 8px;text-align:left;vertical-align:top}
+#finale{border:3px solid var(--ink);padding:14px;margin-top:24px}
+#finale input{font:inherit;width:16em;max-width:100%;padding:3px 6px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink)}
+@media (max-width:520px){body{font-size:16px}h1{font-size:1.45rem}canvas{height:220px}}
+@media print{.check{break-inside:avoid}button{display:none}}
+body.key .check .after{display:block!important}
+</style></head>
+<body><main>
+<p class="course">Project Mercury &middot; Angle-launched projectiles &middot; Aspire-To-Do</p>
+<h1>Splashdown Zone</h1>
+<p>When Freedom 7 came down in 1961, the Navy had a recovery ship parked in the Atlantic waiting for it. Park the ship in the wrong spot and your astronaut bobs around alone. Your job: aim a launcher so the payload splashes down next to the recovery ship.</p>
+<p>You’ll use the range equation <b>R = vᵢ² sin(2θ) / g</b> &mdash; then find out exactly when it stops telling the truth.</p>
+<p class="watch"><b>Before you start:</b> calculator in DEGREE mode, g = 9.8 m/s², round to 3 significant figures (angles to 0.1°). Each check unlocks the next one.</p>
+ 
+<section class="keyonly keybox">
+<p><b>Teacher key</b> (this view only appears with #key at the end of the URL; everything is unlocked)</p>
+<table>
+<tr><th>#</th><th>Answer</th></tr>
+<tr><td>1</td><td>sin(2θ) = 0.784</td></tr>
+<tr><td>2</td><td>25.8° and 64.2° (either order)</td></tr>
+<tr><td>3</td><td>Low: 2.22 s &nbsp; High: 4.59 s</td></tr>
+<tr><td>4</td><td>The low angle: less than half the time for wind to act</td></tr>
+<tr><td>5</td><td>63.8 m (at 45°)</td></tr>
+<tr><td>6</td><td>29.7 m/s</td></tr>
+<tr><td>7</td><td>55.2 m</td></tr>
+<tr><td>8</td><td>vₓ = 21.7 m/s, v<sub>y</sub> = 12.5 m/s</td></tr>
+<tr><td>9</td><td>1.28 s</td></tr>
+<tr><td>10</td><td>23.0 m (7.97 m above the deck + 15.0 m)</td></tr>
+<tr><td>11</td><td>2.17 s</td></tr>
+<tr><td>12</td><td>74.5 m (21.65 m/s × 3.44 s)</td></tr>
+<tr><td>13</td><td>Underestimates: it ignores the extra fall below launch height</td></tr>
+</table>
+<p>Tolerance: ±2% on numeric answers, ±0.5° on angles.</p>
+</section>
+ 
+<section class="step"><h2>Round 1 &middot; Two ways to hit it</h2>
+<p>Your launcher sits at water level and always fires at <b>25.0 m/s</b>. The recovery ship is <b>50.0 m</b> away. The only thing you control is the angle.</p>
+<div class="check" data-id="c1"><p class="q">1. Rearrange the range equation for sin(2θ). What value does sin(2θ) need to be?</p>
+<label class="field">sin(2θ) = <input id="c1s" type="text" inputmode="decimal"></label>
+<button class="go">Check</button><p class="fb"></p></div>
+<div class="check" data-id="c2"><p class="q">2. There are two launch angles that hit the ship. Find both.</p>
+<p class="watch">Watch out: the inverse sine gives you 2θ, not θ. And remember sin(x) = sin(180° − x).</p>
+<label class="field">θ = <input id="c2a" type="text" inputmode="decimal"> °</label>
+<label class="field">θ = <input id="c2b" type="text" inputmode="decimal"> °</label><br>
+<button class="go">Check</button><p class="fb"></p>
+<div class="after"><canvas id="sim1" aria-label="Two trajectories landing at the recovery ship"></canvas>
+<p><b>Launch pad.</b> Try any angle at 25 m/s and see where it lands.</p>
+<label class="field">θ = <input id="padA" type="text" inputmode="decimal"> °</label>
+<button id="padGo" type="button">Launch</button>
+<p id="padOut"></p></div></div>
+</section>
+ 
+<section class="step"><h2>Round 2 &middot; Same splashdown, different trip</h2>
+<p>Both angles land at the ship. They don’t take the same trip to get there.</p>
+<div class="check" data-id="c3"><p class="q">3. Find the time in the air for each angle.</p>
+<label class="field">low angle: t = <input id="c3a" type="text" inputmode="decimal"> s</label>
+<label class="field">high angle: t = <input id="c3b" type="text" inputmode="decimal"> s</label><br>
+<button class="go">Check</button><p class="fb"></p></div>
+<div class="check" data-id="c4"><p class="q">4. The forecast calls for gusty crosswinds. Which angle should the flight director pick?</p>
+<label class="opt"><input type="radio" name="c4" value="a">The high angle, because a higher flight is safer.</label>
+<label class="opt"><input type="radio" name="c4" value="b">The low angle, because the wind has less than half as much time to push it off course.</label>
+<label class="opt"><input type="radio" name="c4" value="c">It doesn’t matter. Both angles land in the same spot.</label>
+<label class="opt"><input type="radio" name="c4" value="d">45°, because it’s always the best angle.</label>
+<button class="go">Check</button><p class="fb"></p></div>
+</section>
+ 
+<section class="step"><h2>Round 3 &middot; Out of reach</h2>
+<div class="check" data-id="c5"><p class="q">5. What is the farthest your 25.0 m/s launcher can possibly send the payload on level water?</p>
+<label class="field">R<sub>max</sub> = <input id="c5r" type="text" inputmode="decimal"> m</label>
+<button class="go">Check</button><p class="fb"></p></div>
+<div class="check" data-id="c6"><p class="q">6. The ship gets repositioned to <b>90.0 m</b> away. What is the <i>minimum</i> launch speed that could still reach it?</p>
+<label class="field">vᵢ = <input id="c6v" type="text" inputmode="decimal"> m/s</label>
+<button class="go">Check</button><p class="fb"></p></div>
+</section>
+ 
+<section class="step"><h2>Round 4 &middot; When the shortcut breaks</h2>
+<p>New setup: the launcher is bolted to a ship’s deck <b>15.0 m above the water</b>. It fires at <b>25.0 m/s</b>, aimed <b>30.0°</b> above horizontal, and the payload splashes down in the water.</p>
+<div class="check" data-id="c7"><p class="q">7. First, the shortcut. What range does R = vᵢ² sin(2θ)/g predict?</p>
+<label class="field">R = <input id="c7r" type="text" inputmode="decimal"> m</label>
+<button class="go">Check</button><p class="fb"></p></div>
+<div class="check" data-id="c8"><p class="q">8. Now the real way. Split the launch velocity.</p>
+<label class="field">vₓ = <input id="c8x" type="text" inputmode="decimal"> m/s</label>
+<label class="field">v<sub>y</sub> = <input id="c8y" type="text" inputmode="decimal"> m/s</label><br>
+<button class="go">Check</button><p class="fb"></p></div>
+<div class="check" data-id="c9"><p class="q">9. Split the flight into an “up” trip and a “down” trip. How long does the up trip (launch to peak) take?</p>
+<label class="field">t<sub>up</sub> = <input id="c9t" type="text" inputmode="decimal"> s</label>
+<button class="go">Check</button><p class="fb"></p></div>
+<div class="check" data-id="c10"><p class="q">10. How high above the <i>water</i> is the payload at its peak?</p>
+<label class="field">h<sub>peak</sub> = <input id="c10h" type="text" inputmode="decimal"> m</label>
+<button class="go">Check</button><p class="fb"></p></div>
+<div class="check" data-id="c11"><p class="q">11. At the peak, v<sub>y</sub> = 0. How long does it take to fall from the peak to the water?</p>
+<label class="field">t<sub>down</sub> = <input id="c11t" type="text" inputmode="decimal"> s</label>
+<button class="go">Check</button><p class="fb"></p></div>
+<div class="check" data-id="c12"><p class="q">12. Where does it actually splash down?</p>
+<label class="field">R = <input id="c12r" type="text" inputmode="decimal"> m</label>
+<button class="go">Check</button><p class="fb"></p>
+<div class="after"><canvas id="sim2" aria-label="Trajectory from a 15 meter deck compared with the range equation prediction"></canvas></div></div>
+<div class="check" data-id="c13"><p class="q">13. When the launch point is higher than the landing point, the range equation…</p>
+<label class="opt"><input type="radio" name="c13" value="a">overestimates the range, because the payload is moving slower when it lands.</label>
+<label class="opt"><input type="radio" name="c13" value="b">underestimates the range, because it ignores the extra fall below launch height.</label>
+<label class="opt"><input type="radio" name="c13" value="c">is still exact, as long as the angle is under 45°.</label>
+<label class="opt"><input type="radio" name="c13" value="d">works if you just add the 15 m deck height to the answer.</label>
+<button class="go">Check</button><p class="fb"></p></div>
+</section>
+ 
+<section class="step"><div id="finale">
+<p><b>Splashdown confirmed.</b> You hit the ship, found its limits, and broke the shortcut on purpose.</p>
+<p><label>Your name: <input type="text" aria-label="Your name"></label></p>
+<p class="fsum"></p><p>Finished: <span class="fdate"></span></p>
+<p class="watch">Screenshot this box and submit it.</p>
+</div></section>
+ 
+</main>
+<script>
+const tol2={rel:0.02}, half={abs:0.5};
+window.CHECKS = {
+ c1:{type:'num',fields:[{id:'c1s',ans:0.784}],hint:v=>v[0]>1?'sin can’t be bigger than 1. Rearranged: sin(2θ) = gR / vᵢ².':'sin(2θ) = gR / vᵢ² = (9.8)(50.0) / (25.0)²',ok:''},
+ c2:{type:'num',unordered:true,fields:[{id:'c2a',ans:25.81,tol:half},{id:'c2b',ans:64.19,tol:half}],
+   hint:v=>{const has=a=>v.some(x=>near(x,a,half));
+     if(has(51.63)||has(128.37))return 'One of those is 2θ, not θ. Cut it in half.';
+     if(has(25.81)||has(64.19))return 'One of those works! For the other: sin⁻¹ gave you 2θ = 51.6°. Which other value of 2θ has the same sine?';
+     return 'Take sin⁻¹(0.784) to get 2θ, then halve it. Then use 180° − 2θ for the second one.';},
+   ok:'Here are both flights:'},
+ c3:{type:'num',fields:[{id:'c3a',ans:2.222},{id:'c3b',ans:4.593}],hint:v=>(near(v[0],1.111,tol2)||near(v[1],2.296,tol2))?'That’s the time to the peak. The whole trip takes twice as long.':'t = 2vᵢ sin θ / g for each angle.',ok:''},
+ c4:{type:'mc',correct:'b',fb:{a:'Higher isn’t safer here. More time in the air means more time for the wind to shove it sideways.',c:'They land in the same spot when nothing else is acting. Wind changes that, and it acts longer on one of them.',d:'45° overshoots the ship. Only 25.8° and 64.2° land at 50.0 m.'},ok:'Lower, faster arcs give the wind less time to work. Keep that in mind for Rocket Part 2.'},
+ c5:{type:'num',fields:[{id:'c5r',ans:63.78}],hint:v=>near(v[0],0,{abs:.5})?'At 90°, it goes straight up and comes straight down. Which angle maxes out sin(2θ)?':'Use the angle that makes sin(2θ) = 1.',ok:'That’s at 45°. Anything farther than 63.8 m is out of reach at this speed.'},
+ c6:{type:'num',fields:[{id:'c6v',ans:29.70}],hint:v=>near(v[0],882,tol2)?'That’s vᵢ². Take the square root.':'Minimum speed means the best angle (sin 2θ = 1). Solve R = vᵢ²/g for vᵢ.',ok:'Only at exactly 45°. Any other angle needs more speed.'},
+ c7:{type:'num',fields:[{id:'c7r',ans:55.23}],ok:'Keep that number. We’re about to find out if it’s right.'},
+ c8:{type:'num',fields:[{id:'c8x',ans:21.65},{id:'c8y',ans:12.5}],hint:v=>(near(v[0],12.5,tol2)&&near(v[1],21.65,tol2))?'You swapped them. Horizontal gets cosine.':'vₓ = vᵢ cos θ, v_y = vᵢ sin θ',ok:''},
+ c9:{type:'num',fields:[{id:'c9t',ans:1.276}],hint:'At the peak v_y = 0. Use v_f = v_i + at.',ok:''},
+ c10:{type:'num',fields:[{id:'c10h',ans:22.97}],hint:v=>near(v[0],7.97,tol2)?'That’s the height above the deck. The water is 15.0 m lower.':'Find the rise above the deck with v_f² = v_i² + 2aΔy, then add the deck height.',ok:''},
+ c11:{type:'num',fields:[{id:'c11t',ans:2.165}],hint:v=>near(v[0],1.75,tol2)?'That’s the fall time from deck height. It falls from the peak, which is higher.':'Starting from rest vertically: Δy = ½gt², so t = √(2h/g).',ok:''},
+ c12:{type:'num',fields:[{id:'c12r',ans:74.49}],hint:v=>near(v[0],27.62,tol2)?'That’s only the up trip. Use the TOTAL time.':near(v[0],46.88,tol2)?'That’s only the down trip. Use the TOTAL time.':near(v[0],55.23,tol2)?'That’s the shortcut’s answer. Use vₓ × (t_up + t_down).':'R = vₓ × (t_up + t_down)',
+   ok:'The shortcut missed by almost 20 m.'},
+ c13:{type:'mc',correct:'b',fb:{a:'It actually lands farther than the shortcut predicts. Look at your two numbers.',c:'You just watched it miss by 19 m at 30°.',d:'55.2 + 15 = 70.2 m, which still misses. Height is vertical and range is horizontal, so they don’t just add.'},ok:'The shortcut assumes it lands at launch height. Every extra meter of fall is extra time moving sideways.'}
+};
+let s1, s2;
+const shipScene = extra => ({xmax:70,ymax:30,groundLabel:'water (m)',target:50,targetLabel:'ship',arcs:extra});
+window.ON_DONE = {
+ c2:()=>{ s1 = s1 || Sim(document.getElementById('sim1'));
+   setTimeout(()=>s1.draw(shipScene([{v:25,th:25.8,label:'25.8°'},{v:25,th:64.2,dash:true,label:'64.2°'}])),30); },
+ c12:()=>{ s2 = s2 || Sim(document.getElementById('sim2'));
+   setTimeout(()=>s2.draw({xmax:80,ymax:30,deck:15,groundLabel:'water (m)',marks:[{x:55.2,label:'shortcut: 55.2 m'}],arcs:[{v:25,th:30,h:15,label:'actual flight'}]}),30); }
+};
+document.getElementById('padGo').addEventListener('click',()=>{
+  const th=parseFloat(document.getElementById('padA').value), out=document.getElementById('padOut');
+  if(!(th>0&&th<90)){out.textContent='Enter an angle between 0° and 90°.';return;}
+  s1 = s1 || Sim(document.getElementById('sim1'));
+  const R=625*Math.sin(2*th*Math.PI/180)/9.8, miss=R-50;
+  s1.draw(shipScene([{v:25,th,label:th+'°'}]));
+  out.textContent = Math.abs(miss)<=1 ? `\u2713 Splashdown at the ship (${R.toFixed(1)} m).` : `\u2717 Missed: landed at ${R.toFixed(1)} m, ${Math.abs(miss).toFixed(1)} m ${miss>0?'long':'short'}.`;
+});
+</script>
+ 
+<script>(function(){
+const KEY = location.hash === '#key';
+if (KEY) document.body.classList.add('key');
+const C = window.CHECKS || {}, HOOK = window.ON_DONE || {};
+const checks = [...document.querySelectorAll('.check')];
+const state = {};
+checks.forEach(b => state[b.dataset.id] = {tries:0, done:false});
+const num = s => { const m = String(s).replace(/,/g,'').replace(/\u2212/g,'-').match(/-?\d*\.?\d+(e-?\d+)?/i); return m ? parseFloat(m[0]) : NaN; };
+const near = (x,a,t) => isFinite(x) && (t && t.abs != null ? Math.abs(x-a) <= t.abs : Math.abs(x-a) <= Math.abs(a)*((t && t.rel) || 0.02));
+window.near = near;
+const sub = t => t.replace(/_(y,i|y|up|down)\b/g, '<sub>$1</sub>');
+ 
+function refresh(){
+  if (KEY) return;
+  const k = checks.findIndex(b => !state[b.dataset.id].done);
+  checks.forEach((b,i) => b.classList.toggle('locked', k !== -1 && i > k));
+  document.querySelectorAll('.step').forEach(s => {
+    const first = s.querySelector('.check');
+    s.classList.toggle('locked', first ? first.classList.contains('locked') : k !== -1);
+  });
+}
+ 
+function grade(b){
+  const id = b.dataset.id, c = C[id], st = state[id], fb = b.querySelector('.fb');
+  let ok = false, msg = '';
+  if (c.type === 'mc'){
+    const sel = b.querySelector('input[type=radio]:checked');
+    if (!sel){ fb.textContent = 'Pick an answer first.'; return; }
+    ok = sel.value === c.correct;
+    msg = ok ? (c.ok || '') : ((c.fb && c.fb[sel.value]) || 'Not quite. Reread the step and try again.');
+  } else if (c.type === 'multi'){
+    const sel = [...b.querySelectorAll('input[type=checkbox]:checked')].map(x => x.value);
+    if (!sel.length){ fb.textContent = 'Check at least one box first.'; return; }
+    const right = sel.filter(v => c.correct.includes(v)).length, wrong = sel.length - right;
+    ok = right === c.correct.length && wrong === 0;
+    msg = ok ? (c.ok || '') : `You have ${right} of the ${c.correct.length} correct choices checked` + (wrong ? `, plus ${wrong} that ${wrong>1?'don\u2019t':'doesn\u2019t'} belong.` : '.') + (c.hint ? ' ' + c.hint : '');
+  } else {
+    const ins = c.fields.map(f => document.getElementById(f.id));
+    const vals = ins.map(i => num(i.value));
+    if (vals.some(v => !isFinite(v))){ fb.textContent = 'Enter a number in every box.'; return; }
+    let goods = null;
+    if (c.unordered){
+      const sv = [...vals].sort((x,y)=>x-y), sa = c.fields.map(f=>f.ans).sort((x,y)=>x-y);
+      ok = sv.every((v,i) => near(v, sa[i], c.fields[i].tol));
+    } else {
+      goods = vals.map((v,i) => near(v, c.fields[i].ans, c.fields[i].tol));
+      ok = goods.every(Boolean);
+    }
+    if (goods && ins.length > 1) ins.forEach((inp,i) => {
+      const holder = inp.parentElement; let m = holder.querySelector('.mark');
+      if (!m){ m = document.createElement('span'); m.className = 'mark'; holder.appendChild(m); }
+      m.textContent = goods[i] ? '\u2713' : '\u2717';
+    });
+    if (ok) msg = c.ok || '';
+    else { const h = typeof c.hint === 'function' ? c.hint(vals) : c.hint; msg = h || 'Not quite. Check your work and try again.'; }
+  }
+  st.tries++;
+  if (ok){
+    st.done = true; b.classList.add('done');
+    fb.innerHTML = sub('\u2713 Correct. ' + msg);
+    b.querySelectorAll('input, button.go').forEach(x => { if (!x.closest('.after')) x.disabled = true; });
+    if (HOOK[id]) HOOK[id]();
+    refresh(); finale();
+  } else fb.innerHTML = sub('\u2717 ' + msg);
+}
+ 
+function finale(){
+  const f = document.getElementById('finale'); if (!f) return;
+  const all = checks.length, first = checks.filter(b => state[b.dataset.id].tries === 1).length;
+  const tot = checks.reduce((s,b) => s + state[b.dataset.id].tries, 0);
+  f.querySelector('.fsum').textContent = `${all} of ${all} checks complete \u00b7 ${first} correct on the first try \u00b7 ${tot} total attempts`;
+  f.querySelector('.fdate').textContent = new Date().toLocaleString();
+}
+ 
+checks.forEach(b => {
+  b.querySelector('button.go').addEventListener('click', () => grade(b));
+  b.querySelectorAll('input[type=text]').forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') grade(b); }));
+});
+refresh();
+if (KEY) Object.values(HOOK).forEach(fn => fn());
+ 
+/* ---- trajectory sketcher ---- */
+window.Sim = function(canvas){
+  const ctx = canvas.getContext('2d'); let anim, last;
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const fly = a => { const g=9.8, r=a.th*Math.PI/180, vx=a.v*Math.cos(r), vy=a.v*Math.sin(r), h=a.h||0;
+    return {vx, vy, h, T:(vy+Math.sqrt(vy*vy+2*g*h))/g}; };
+  function draw(o, instant){
+    last = o; cancelAnimationFrame(anim);
+    const dpr = window.devicePixelRatio || 1, W = canvas.clientWidth, H = canvas.clientHeight;
+    if (!W) return;
+    canvas.width = W*dpr; canvas.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    const arcs = o.arcs.map(a => Object.assign({}, a, fly(a)));
+    const pl = o.deck ? 46 : 30, pr = 12, pt = 12, pb = 30;
+    const X = x => pl + x/o.xmax*(W-pl-pr), Y = y => H - pb - y/o.ymax*(H-pt-pb);
+    const Tmax = Math.max(...arcs.map(a => a.T));
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const dur = (reduce || instant) ? 0 : 2400, t0 = performance.now();
+    function frame(now){
+      const ink = css('--ink'), faint = css('--faint');
+      const f = dur ? Math.min(1,(now-t0)/dur) : 1, tt = f*Tmax;
+      ctx.clearRect(0,0,W,H); ctx.setLineDash([]);
+      ctx.strokeStyle = ink; ctx.fillStyle = ink; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(pl-40, Y(0)); ctx.lineTo(W, Y(0)); ctx.stroke();
+      ctx.font = '12px Georgia, serif'; ctx.textAlign = 'center'; ctx.lineWidth = 1;
+      const step = o.xmax > 60 ? 10 : 5;
+      for (let x = 0; x <= o.xmax; x += step){ ctx.beginPath(); ctx.moveTo(X(x),Y(0)); ctx.lineTo(X(x),Y(0)+5); ctx.stroke(); const lastT = x + step > o.xmax; ctx.textAlign = lastT ? 'right' : 'center'; ctx.fillText(x + (lastT ? ' m' : ''), lastT ? X(x)+4 : X(x), Y(0)+18); }
+      if (o.deck){ ctx.lineWidth = 2; ctx.strokeRect(X(0)-30, Y(o.deck), 30, Y(0)-Y(o.deck)); ctx.textAlign='center'; ctx.fillText(o.deck+' m', X(0)-15, (Y(o.deck)+Y(0))/2+4); }
+      if (o.target != null){ const tx = X(o.target); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(tx,Y(0)); ctx.lineTo(tx,Y(0)-34); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(tx,Y(0)-34); ctx.lineTo(tx+16,Y(0)-28); ctx.lineTo(tx,Y(0)-22); ctx.closePath(); ctx.fill();
+        ctx.textAlign='center'; ctx.fillText(o.targetLabel || 'target', tx, Y(0)-40); }
+      (o.marks||[]).forEach(m => { ctx.setLineDash([3,4]); ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(X(m.x),Y(0)); ctx.lineTo(X(m.x),pt+58); ctx.stroke(); ctx.setLineDash([]); ctx.textAlign='center'; ctx.fillText(m.label, X(m.x), pt+52); });
+      arcs.forEach(a => {
+        const end = Math.min(tt, a.T), n = 80; ctx.setLineDash(a.dash ? [7,5] : []); ctx.lineWidth = 2.5; ctx.beginPath();
+        for (let i = 0; i <= n; i++){ const t = end*i/n, x = a.vx*t, y = a.h + a.vy*t - 4.9*t*t; i ? ctx.lineTo(X(x),Y(y)) : ctx.moveTo(X(x),Y(y)); }
+        ctx.stroke(); ctx.setLineDash([]);
+        const x = a.vx*end, y = a.h + a.vy*end - 4.9*end*end; ctx.beginPath(); ctx.arc(X(x),Y(y),4.5,0,7); ctx.fill();
+      });
+      if (f >= 1){ ctx.textAlign = 'left'; arcs.forEach((a,i) => {
+        const ly = pt + 14 + i*18, lx = Math.max(pl + 6, W - pr - 230);
+        ctx.setLineDash(a.dash ? [7,5] : []); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(lx, ly-4); ctx.lineTo(lx+26, ly-4); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillText(`${a.label || a.th+'\u00b0'}: lands at ${(a.vx*a.T).toFixed(1)} m`, lx+32, ly); }); }
+      else anim = requestAnimationFrame(frame);
+    }
+    anim = requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize', () => { if (last) draw(Object.assign({}, last), true); });
+  return { draw, fly };
+};
+})();
+</script>
+</body></html>
